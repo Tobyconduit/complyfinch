@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComplyFinch Website Scan Report</title>
+<style>
+  body { font-family: 'Open Sans', sans-serif; margin: 40px; color: #333; background: #f9f9f9; }
+  header { text-align: center; margin-bottom: 40px; }
+  h1 { font-size: 30px; margin-bottom: 5px; color: #222; }
+  h2 { font-size: 22px; margin-top: 30px; margin-bottom: 10px; color: #444; border-bottom: 2px solid #ddd; padding-bottom: 5px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #fff; }
+  th, td { border: 1px solid #ccc; padding: 12px; text-align: left; }
+  th { background-color: #f2f2f2; }
+  .severity { font-weight: bold; display: flex; align-items: center; }
+  .high::before { content: "⚠️ "; color: red; }
+  .medium::before { content: "⚠️ "; color: orange; }
+  .low::before { content: "ℹ️ "; color: green; }
+  section { background: #fff; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+  footer { text-align: center; margin-top: 40px; font-size: 12px; color: #666; }
+  input, textarea { width: 100%; font-family: 'Open Sans', sans-serif; padding: 8px; margin-top: 5px; margin-bottom: 15px; }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="CFLogo.png" alt="ComplyFinch Logo" style="height:158px;"><br>
+  <h1>Website Scan Report</h1>
+  <p>www.complyfinch.com</p>
+</header>
+
+<section>
+  <h2>Executive Summary</h2>
+  <p><strong>Scan Date:</strong> <input type="text" placeholder="MM/DD/YYYY"><br>
+     <strong>Site Scanned:</strong> <input type="text" placeholder="Client Website"></p>
+  <p>Summary: <textarea placeholder="Brief summary of issues found"></textarea></p>
+</section>
+
+<section>
+  <h2>Key Findings</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Issue</th>
+        <th>Category</th>
+        <th>Severity</th>
+        <th>Explanation</th>
+        <th>Action Step</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Auto-filled from CSV -->
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Next Steps</h2>
+  <ol>
+    <li><textarea placeholder="Step 1"></textarea></li>
+    <li><textarea placeholder="Step 2"></textarea></li>
+    <li><textarea placeholder="Step 3"></textarea></li>
+  </ol>
+</section>
+
+<section>
+  <h2>Disclaimer</h2>
+  <p>This scan highlights the most critical website issues. Full review may require specialized expertise or manual testing. Tasks can be outsourced as needed.</p>
+</section>
+
+<footer>
+  ComplyFinch | www.complyfinch.com | support@complyfinch.com
+</footer>
+
+
+
+<script>
+function loadCSV() {
+  const csvFile = 'client-data/clientA_issues.csv'; // path to your CSV
+
+  fetch(csvFile)
+    .then(response => response.text())
+    .then(data => {
+      const tbody = document.querySelector('tbody');
+      tbody.innerHTML = ''; // clear table first
+      const rows = data.split('\n').slice(1); // skip header
+      rows.forEach(row => {
+        if(row.trim() === '') return; // skip empty lines
+        const cols = row.split(',');
+        const tr = document.createElement('tr');
+        cols.forEach(col => {
+          const td = document.createElement('td');
+          td.textContent = col.trim();
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+    })
+    .catch(err => console.error('Error loading CSV:', err));
+}
+
+loadCSV(); // run it
+</script>
+
+
+</body>
+</html>

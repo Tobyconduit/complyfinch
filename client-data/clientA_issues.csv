@@ -1,0 +1,5 @@
+Issue,Category,Severity,Explanation,Action Step
+Missing alt text,Accessibility,High,Images on homepage missing alt attributes,Add descriptive alt text
+Low contrast text,Accessibility,Medium,Gray text on white background,Adjust colors
+Broken links,SEO,Medium,Some internal links return 404,Update or remove broken links
+Slow page load,Performance,High,Homepage takes >5s to load,Optimize images and scripts
